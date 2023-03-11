@@ -88,10 +88,27 @@ class HBNBCommand(cmd.Cmd):
 
         elif line not in self.__classes:
                 print("** class doesn't exist **")
-
+    
     def do_update(self, line):
-        """Usage: update <class name> <id> <attribute name> "<attribute value>""""
+        """Usage: update <class name> <id> <attribute name> "<attribute value>"""
         """Updates an instance based on the class name and id by adding or updating attribute"""
+        args = line.split( )
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] not in self.__classes:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        else:
+            key = "{}.{}".format(args[0], args[1])
+            objects = storage.all()
+            if key not in objects:
+                print("** no instance found **")
+            elif len(args) < 3:
+                print("** attribute name missing **")
+            elif len(args) < 4:
+                print(("** no instance found **"))
+
         
         
 
