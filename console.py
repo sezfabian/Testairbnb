@@ -4,6 +4,7 @@ import cmd
 from models.base_model import BaseModel
 from models import FileStorage
 storage = FileStorage()
+from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
 
@@ -88,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
 
         elif line not in self.__classes:
                 print("** class doesn't exist **")
-    
+
     def do_update(self, line):
         """Usage: update <class name> <id> <attribute name> "<attribute value>"""
         """Updates an instance based on the class name and id by adding or updating attribute"""
@@ -107,11 +108,16 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) < 3:
                 print("** attribute name missing **")
             elif len(args) < 4:
-                print(("** no instance found **"))
-
-        
-        
+                print(("** value missing **"))
+            else:
+                for k, v in objects.items():
+                    if key == k:
+                        my_obj = eval()[v["__class__"]](**v)
+                print(my_obj)
 
     def do_clear(self, line):
         FileStorage.__objects = {}
         storage.save()
+
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
