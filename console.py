@@ -110,10 +110,12 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) < 4:
                 print(("** value missing **"))
             else:
-                for k, v in objects.items():
-                    if key == k:
-                        my_obj = eval()[v["__class__"]](**v)
-                print(my_obj)
+                all_objs = storage.all()
+                for obj_id in all_objs.keys():
+                    if obj_id == key:
+                        obj = all_objs[obj_id]
+                        eval("obj.{}={}".format(args[2], args[3]))
+                        print(obj)
 
     def do_clear(self, line):
         FileStorage.__objects = {}
